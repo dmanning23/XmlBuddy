@@ -1,4 +1,5 @@
 ﻿using FilenameBuddy;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Xml;
@@ -41,7 +42,7 @@ namespace XmlBuddy
 		/// </summary>
 		/// <param name="strFilename">file to open</param>
 		/// <returns>whether or not it was able to open it</returns>
-		public bool ReadXmlFile(Filename strFilename)
+		public virtual void ReadXmlFile(Filename strFilename)
 		{
 			XmlFilename = strFilename;
 
@@ -54,33 +55,24 @@ namespace XmlBuddy
 			if (rootNode.NodeType != XmlNodeType.Element)
 			{
 				//should be an xml node!!!
-				Debug.Assert(false);
-				return false;
+				throw new Exception("not an xml node: " + rootNode.NodeType.ToString());
 			}
 
 			//eat up the name of that xml node
 			if (("XnaContent" != rootNode.Name) || !rootNode.HasChildNodes)
 			{
-				Debug.Assert(false);
-				return false;
+				throw new Exception("invalid XnaContent node: " + rootNode.Name);
 			}
 
 			//next node is "<Asset Type="SPFSettings.StateMachineXML">"
 			XmlNode assetNode = rootNode.FirstChild;
-			if (null == assetNode)
-			{
-				Debug.Assert(false);
-				return false;
-			}
 			if (!assetNode.HasChildNodes)
 			{
-				Debug.Assert(false);
-				return false;
+				throw new Exception("invalid Asset node: no child nodes");
 			}
 			if ("Asset" != assetNode.Name)
 			{
-				Debug.Assert(false);
-				return false;
+				throw new Exception("invalid Asset node: " + assetNode.Name);
 			}
 
 			//should have an attribute Type
@@ -94,14 +86,12 @@ namespace XmlBuddy
 				{
 					if (strValue != ContentName)
 					{
-						Debug.Assert(false);
-						return false;
+						throw new Exception("invalid Type node: " + strValue);
 					}
 				}
 				else
 				{
-					Debug.Assert(false);
-					return false;
+					throw new Exception("invalid Type node: " + strName);
 				}
 			}
 
@@ -110,7 +100,6 @@ namespace XmlBuddy
 
 			// Close the file.
 			stream.Close();
-			return true;
 		}
 
 		/// <summary>
