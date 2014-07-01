@@ -38,6 +38,15 @@ namespace XmlBuddy
 		}
 
 		/// <summary>
+		/// copy constructor
+		/// </summary>
+		protected XmlFileBuddy(XmlFileBuddy obj)
+		{
+			ContentName = obj.ContentName;
+			XmlFilename = new Filename(obj.XmlFilename);
+		}
+
+		/// <summary>
 		/// read in serialized xna state machine from XML
 		/// </summary>
 		/// <param name="strFilename">file to open</param>
