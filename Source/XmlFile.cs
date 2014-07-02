@@ -35,15 +35,24 @@ namespace XmlBuddy
 		public XmlFileBuddy(string contentName)
 		{
 			ContentName = contentName;
+			XmlFilename = new Filename();
+		}
+
+		/// <summary>
+		/// constructor
+		/// </summary>
+		public XmlFileBuddy(string contentName, Filename file)
+		{
+			ContentName = contentName;
+			XmlFilename = new Filename(file);
 		}
 
 		/// <summary>
 		/// copy constructor
 		/// </summary>
 		protected XmlFileBuddy(XmlFileBuddy obj)
+			: this(obj.ContentName, obj.XmlFilename)
 		{
-			ContentName = obj.ContentName;
-			XmlFilename = new Filename(obj.XmlFilename);
 		}
 
 		/// <summary>
@@ -51,12 +60,10 @@ namespace XmlBuddy
 		/// </summary>
 		/// <param name="strFilename">file to open</param>
 		/// <returns>whether or not it was able to open it</returns>
-		public virtual void ReadXmlFile(Filename strFilename)
+		public virtual void ReadXmlFile()
 		{
-			XmlFilename = strFilename;
-
 			// Open the file.
-			FileStream stream = File.Open(strFilename.File, FileMode.Open, FileAccess.Read);
+			FileStream stream = File.Open(XmlFilename.File, FileMode.Open, FileAccess.Read);
 			XmlDocument xmlDoc = new XmlDocument();
 			xmlDoc.Load(stream);
 			XmlNode rootNode = xmlDoc.DocumentElement;
@@ -115,12 +122,10 @@ namespace XmlBuddy
 		/// write out this object to an xml file
 		/// </summary>
 		/// <param name="strFilename">teh file to write out to</param>
-		public void WriteXml(Filename strFilename)
+		public void WriteXml()
 		{
-			XmlFilename = strFilename;
-
 			//open the file, create it if it doesnt exist yet
-			XmlTextWriter xmlFile = new XmlTextWriter(strFilename.File, null);
+			XmlTextWriter xmlFile = new XmlTextWriter(XmlFilename.File, null);
 			xmlFile.Formatting = Formatting.Indented;
 			xmlFile.Indentation = 1;
 			xmlFile.IndentChar = '\t';
