@@ -68,6 +68,7 @@ namespace XmlBuddy
 			xmlDoc.Load(stream);
 			XmlNode rootNode = xmlDoc.DocumentElement;
 
+#if DEBUG
 			if (rootNode.NodeType != XmlNodeType.Element)
 			{
 				//should be an xml node!!!
@@ -110,6 +111,8 @@ namespace XmlBuddy
 					throw new Exception("invalid Type node: " + strName);
 				}
 			}
+
+#endif
 
 			//Read in child nodes
 			ReadChildNodes(assetNode, ParseXmlNode);
