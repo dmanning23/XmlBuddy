@@ -3,6 +3,12 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Xml;
+#if ANDROID
+using Microsoft.Xna.Framework;
+#endif
+#if OUYA
+using Ouya.Console.Api;
+#endif
 
 namespace XmlBuddy
 {
