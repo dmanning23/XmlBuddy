@@ -18,7 +18,7 @@ namespace XmlBuddy
 		/// <summary>
 		/// The name this type of content is stored in the xml file
 		/// </summary>
-		private string ContentName { get; set; }
+		public string ContentName { get; private set; }
 
 		/// <summary>
 		/// The file this dude was read/write from
@@ -63,7 +63,11 @@ namespace XmlBuddy
 		public virtual void ReadXmlFile()
 		{
 			// Open the file.
+#if ANDROID
+			Stream stream = Game.Activity.Assets.Open(XmlFilename.File);
+#else
 			FileStream stream = File.Open(XmlFilename.File, FileMode.Open, FileAccess.Read);
+#endif
 			XmlDocument xmlDoc = new XmlDocument();
 			xmlDoc.Load(stream);
 			XmlNode rootNode = xmlDoc.DocumentElement;
@@ -157,13 +161,13 @@ namespace XmlBuddy
 		/// </summary>
 		/// <param name="xmlNode">the xml node to read from</param>
 		/// <returns></returns>
-		protected abstract void ParseXmlNode(XmlNode xmlNode);
+		public abstract void ParseXmlNode(XmlNode xmlNode);
 
 		/// <summary>
 		/// Write out all the data for this object to xml nodes.
 		/// </summary>
 		/// <param name="xmlFile"></param>
-		protected abstract void WriteXmlNodes(XmlTextWriter xmlFile);
+		public abstract void WriteXmlNodes(XmlTextWriter xmlFile);
 
 		/// <summary>
 		/// Given an xml node, call the delegate on all its child nodes
