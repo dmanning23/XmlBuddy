@@ -90,9 +90,10 @@ namespace XmlBuddy
 			{
 				throw new Exception("invalid XnaContent node: " + rootNode.Name);
 			}
-
+#endif
 			//next node is "<Asset Type="SPFSettings.StateMachineXML">"
 			XmlNode assetNode = rootNode.FirstChild;
+#if DEBUG
 			if (!assetNode.HasChildNodes)
 			{
 				throw new Exception("invalid Asset node: no child nodes");
@@ -121,7 +122,6 @@ namespace XmlBuddy
 					throw new Exception("invalid Type node: " + strName);
 				}
 			}
-
 #endif
 
 			//Read in child nodes
