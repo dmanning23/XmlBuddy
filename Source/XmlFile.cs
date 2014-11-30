@@ -68,98 +68,109 @@ namespace XmlBuddy
 		/// <returns>whether or not it was able to open it</returns>
 		public virtual void ReadXmlFile()
 		{
-			// Open the file.
+			Stream stream = null;
+			try
+			{
+				// Open the file.
 #if ANDROID
-			Stream stream = Game.Activity.Assets.Open(XmlFilename.File);
+				stream = Game.Activity.Assets.Open(XmlFilename.File);
 #else
-			FileStream stream = File.Open(XmlFilename.File, FileMode.Open, FileAccess.Read);
+				stream = File.Open(XmlFilename.File, FileMode.Open, FileAccess.Read);
 #endif
-			XmlDocument xmlDoc = new XmlDocument();
-			xmlDoc.Load(stream);
-			XmlNode rootNode = xmlDoc.DocumentElement;
+				XmlDocument xmlDoc = new XmlDocument();
+				xmlDoc.Load(stream);
+				XmlNode rootNode = xmlDoc.DocumentElement;
 
 #if DEBUG
-			if (rootNode.NodeType != XmlNodeType.Element)
-			{
-				//should be an xml node!!!
-				throw new Exception("not an xml node: " + rootNode.NodeType.ToString());
-			}
-
-			//eat up the name of that xml node
-			if (("XnaContent" != rootNode.Name) || !rootNode.HasChildNodes)
-			{
-				throw new Exception("invalid XnaContent node: " + rootNode.Name);
-			}
-#endif
-			//next node is "<Asset Type="SPFSettings.StateMachineXML">"
-			XmlNode assetNode = rootNode.FirstChild;
-#if DEBUG
-			if (!assetNode.HasChildNodes)
-			{
-				throw new Exception("invalid Asset node: no child nodes");
-			}
-			if ("Asset" != assetNode.Name)
-			{
-				throw new Exception("invalid Asset node: " + assetNode.Name);
-			}
-
-			//should have an attribute Type
-			XmlNamedNodeMap mapAttributes = assetNode.Attributes;
-			for (int i = 0; i < mapAttributes.Count; i++)
-			{
-				//will only have the name attribute
-				string strName = mapAttributes.Item(i).Name;
-				string strValue = mapAttributes.Item(i).Value;
-				if ("Type" == strName)
+				if (rootNode.NodeType != XmlNodeType.Element)
 				{
-					if (strValue != ContentName)
+					//should be an xml node!!!
+					throw new Exception("not an xml node: " + rootNode.NodeType.ToString());
+				}
+
+				//eat up the name of that xml node
+				if (("XnaContent" != rootNode.Name) || !rootNode.HasChildNodes)
+				{
+					throw new Exception("invalid XnaContent node: " + rootNode.Name);
+				}
+#endif
+				//next node is "<Asset Type="SPFSettings.StateMachineXML">"
+				XmlNode assetNode = rootNode.FirstChild;
+#if DEBUG
+				if (!assetNode.HasChildNodes)
+				{
+					throw new Exception("invalid Asset node: no child nodes");
+				}
+				if ("Asset" != assetNode.Name)
+				{
+					throw new Exception("invalid Asset node: " + assetNode.Name);
+				}
+
+				//should have an attribute Type
+				XmlNamedNodeMap mapAttributes = assetNode.Attributes;
+				for (int i = 0; i < mapAttributes.Count; i++)
+				{
+					//will only have the name attribute
+					string strName = mapAttributes.Item(i).Name;
+					string strValue = mapAttributes.Item(i).Value;
+					if ("Type" == strName)
 					{
-						throw new Exception("invalid Type node: " + strValue);
+						if (strValue != ContentName)
+						{
+							throw new Exception("invalid Type node: " + strValue);
+						}
+					}
+					else
+					{
+						throw new Exception("invalid Type node: " + strName);
 					}
 				}
-				else
-				{
-					throw new Exception("invalid Type node: " + strName);
-				}
-			}
 #endif
 
-			//Read in child nodes
-			ReadChildNodes(assetNode, ParseXmlNode);
-
-			// Close the file.
-			stream.Close();
+				//Read in child nodes
+				ReadChildNodes(assetNode, ParseXmlNode);
+			}
+			finally
+			{
+				if (null != stream)
+				{
+					// Close the file.
+					stream.Close();
+					stream.Dispose();
+				}
+			}
 		}
 
 		/// <summary>
 		/// write out this object to an xml file
 		/// </summary>
-		/// <param name="strFilename">teh file to write out to</param>
 		public void WriteXml()
 		{
 			//open the file, create it if it doesnt exist yet
-			XmlTextWriter xmlFile = new XmlTextWriter(XmlFilename.File, null);
-			xmlFile.Formatting = Formatting.Indented;
-			xmlFile.Indentation = 1;
-			xmlFile.IndentChar = '\t';
+			using (XmlTextWriter xmlFile = new XmlTextWriter(XmlFilename.File, null))
+			{
+				xmlFile.Formatting = Formatting.Indented;
+				xmlFile.Indentation = 1;
+				xmlFile.IndentChar = '\t';
 
-			xmlFile.WriteStartDocument();
+				xmlFile.WriteStartDocument();
 
-			//add the xml node
-			xmlFile.WriteStartElement("XnaContent");
-			xmlFile.WriteStartElement("Asset");
-			xmlFile.WriteAttributeString("Type", ContentName);
+				//add the xml node
+				xmlFile.WriteStartElement("XnaContent");
+				xmlFile.WriteStartElement("Asset");
+				xmlFile.WriteAttributeString("Type", ContentName);
 
-			WriteXmlNodes(xmlFile);
+				WriteXmlNodes(xmlFile);
 
-			xmlFile.WriteEndElement();
-			xmlFile.WriteEndElement();
+				xmlFile.WriteEndElement();
+				xmlFile.WriteEndElement();
 
-			xmlFile.WriteEndDocument();
+				xmlFile.WriteEndDocument();
 
-			// Close the file.
-			xmlFile.Flush();
-			xmlFile.Close();
+				// Close the file.
+				xmlFile.Flush();
+				xmlFile.Close();
+			}
 		}
 
 		/// <summary>
