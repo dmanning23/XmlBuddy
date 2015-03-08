@@ -199,7 +199,11 @@ namespace XmlBuddy
 					null != childNode;
 					childNode = childNode.NextSibling)
 				{
-					func(childNode);
+					//ignore comment nodes
+					if (childNode.NodeType != XmlNodeType.Comment)
+					{
+						func(childNode);
+					}
 				}
 			}
 		}
