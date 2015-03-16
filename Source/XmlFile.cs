@@ -78,7 +78,15 @@ namespace XmlBuddy
 				stream = File.Open(XmlFilename.File, FileMode.Open, FileAccess.Read);
 #endif
 				XmlDocument xmlDoc = new XmlDocument();
-				xmlDoc.Load(stream);
+				try
+				{
+					xmlDoc.Load(stream);
+				}
+				catch (Exception ex)
+				{
+					throw new Exception(string.Format("error in {0}", XmlFilename.GetFile()), ex);
+				}
+				
 				XmlNode rootNode = xmlDoc.DocumentElement;
 
 #if DEBUG
