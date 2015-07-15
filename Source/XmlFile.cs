@@ -38,7 +38,7 @@ namespace XmlBuddy
 		/// <summary>
 		/// constructor
 		/// </summary>
-		public XmlFileBuddy(string contentName)
+		protected XmlFileBuddy(string contentName)
 		{
 			ContentName = contentName;
 			XmlFilename = new Filename();
@@ -47,7 +47,7 @@ namespace XmlBuddy
 		/// <summary>
 		/// constructor
 		/// </summary>
-		public XmlFileBuddy(string contentName, Filename file)
+		protected XmlFileBuddy(string contentName, Filename file)
 		{
 			ContentName = contentName;
 			XmlFilename = new Filename(file);
@@ -62,10 +62,8 @@ namespace XmlBuddy
 		}
 
 		/// <summary>
-		/// read in serialized xna state machine from XML
+		/// Open the specified xml file and read it in
 		/// </summary>
-		/// <param name="strFilename">file to open</param>
-		/// <returns>whether or not it was able to open it</returns>
 		public virtual void ReadXmlFile()
 		{
 			Stream stream = null;
@@ -88,55 +86,14 @@ namespace XmlBuddy
 				}
 				
 				XmlNode rootNode = xmlDoc.DocumentElement;
-
-#if DEBUG
 				if (rootNode.NodeType != XmlNodeType.Element)
 				{
 					//should be an xml node!!!
 					throw new Exception("not an xml node: " + rootNode.NodeType.ToString());
 				}
 
-				//eat up the name of that xml node
-				if (("XnaContent" != rootNode.Name) || !rootNode.HasChildNodes)
-				{
-					throw new Exception("invalid XnaContent node: " + rootNode.Name);
-				}
-#endif
-				//next node is "<Asset Type="SPFSettings.StateMachineXML">"
-				XmlNode assetNode = rootNode.FirstChild;
-#if DEBUG
-				if (!assetNode.HasChildNodes)
-				{
-					throw new Exception("invalid Asset node: no child nodes");
-				}
-				if ("Asset" != assetNode.Name)
-				{
-					throw new Exception("invalid Asset node: " + assetNode.Name);
-				}
-
-				//should have an attribute Type
-				XmlNamedNodeMap mapAttributes = assetNode.Attributes;
-				for (int i = 0; i < mapAttributes.Count; i++)
-				{
-					//will only have the name attribute
-					string strName = mapAttributes.Item(i).Name;
-					string strValue = mapAttributes.Item(i).Value;
-					if ("Type" == strName)
-					{
-						if (strValue != ContentName)
-						{
-							throw new Exception("invalid Type node: " + strValue);
-						}
-					}
-					else
-					{
-						throw new Exception("invalid Type node: " + strName);
-					}
-				}
-#endif
-
 				//Read in child nodes
-				ReadChildNodes(assetNode, ParseXmlNode);
+				ReadChildNodes(rootNode, ParseXmlNode);
 			}
 			finally
 			{
@@ -164,13 +121,10 @@ namespace XmlBuddy
 				xmlFile.WriteStartDocument();
 
 				//add the xml node
-				xmlFile.WriteStartElement("XnaContent");
-				xmlFile.WriteStartElement("Asset");
-				xmlFile.WriteAttributeString("Type", ContentName);
+				xmlFile.WriteStartElement(ContentName);
 
 				WriteXmlNodes(xmlFile);
 
-				xmlFile.WriteEndElement();
 				xmlFile.WriteEndElement();
 
 				xmlFile.WriteEndDocument();
@@ -213,6 +167,15 @@ namespace XmlBuddy
 						func(childNode);
 					}
 				}
+			}
+		}
+
+		public static void ReadAttributes(XmlNode node, XmlNodeFunc func)
+		{
+			var attributes = node.Attributes;
+			for (int i = 0; i < attributes.Count; i++)
+			{
+				func(attributes.Item(i));
 			}
 		}
 
