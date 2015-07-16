@@ -12,7 +12,7 @@ using Ouya.Console.Api;
 
 namespace XmlBuddy
 {
-	public delegate void XmlNodeFunc(XmlNode xmlNode);
+	public delegate void XmlNodeFunc(XmlNode node);
 
 	/// <summary>
 	/// Stores all the states, messages, and state transitions
@@ -29,7 +29,7 @@ namespace XmlBuddy
 		/// <summary>
 		/// The file this dude was read/write from
 		/// </summary>
-		public Filename XmlFilename { get; set; }
+		public Filename Filename { get; set; }
 
 		#endregion //Fields
 
@@ -41,7 +41,7 @@ namespace XmlBuddy
 		protected XmlFileBuddy(string contentName)
 		{
 			ContentName = contentName;
-			XmlFilename = new Filename();
+			Filename = new Filename();
 		}
 
 		/// <summary>
@@ -50,14 +50,14 @@ namespace XmlBuddy
 		protected XmlFileBuddy(string contentName, Filename file)
 		{
 			ContentName = contentName;
-			XmlFilename = new Filename(file);
+			Filename = new Filename(file);
 		}
 
 		/// <summary>
 		/// copy constructor
 		/// </summary>
 		protected XmlFileBuddy(XmlFileBuddy obj)
-			: this(obj.ContentName, obj.XmlFilename)
+			: this(obj.ContentName, obj.Filename)
 		{
 		}
 
@@ -73,7 +73,7 @@ namespace XmlBuddy
 #if ANDROID
 				stream = Game.Activity.Assets.Open(XmlFilename.File);
 #else
-				stream = File.Open(XmlFilename.File, FileMode.Open, FileAccess.Read);
+				stream = File.Open(Filename.File, FileMode.Open, FileAccess.Read);
 #endif
 				XmlDocument xmlDoc = new XmlDocument();
 				try
@@ -82,7 +82,7 @@ namespace XmlBuddy
 				}
 				catch (Exception ex)
 				{
-					throw new Exception(string.Format("error in {0}", XmlFilename.GetFile()), ex);
+					throw new Exception(string.Format("error in {0}", Filename.GetFile()), ex);
 				}
 				
 				XmlNode rootNode = xmlDoc.DocumentElement;
@@ -112,7 +112,7 @@ namespace XmlBuddy
 		public void WriteXml()
 		{
 			//open the file, create it if it doesnt exist yet
-			using (XmlTextWriter xmlFile = new XmlTextWriter(XmlFilename.File, null))
+			using (XmlTextWriter xmlFile = new XmlTextWriter(Filename.File, null))
 			{
 				xmlFile.Formatting = Formatting.Indented;
 				xmlFile.Indentation = 1;
@@ -151,13 +151,13 @@ namespace XmlBuddy
 		/// <summary>
 		/// Given an xml node, call the delegate on all its child nodes
 		/// </summary>
-		/// <param name="xmlNode"></param>
+		/// <param name="node"></param>
 		/// <param name="func"></param>
-		public static void ReadChildNodes(XmlNode xmlNode, XmlNodeFunc func)
+		public static void ReadChildNodes(XmlNode node, XmlNodeFunc func)
 		{
-			if (xmlNode.HasChildNodes)
+			if (node.HasChildNodes)
 			{
-				for (XmlNode childNode = xmlNode.FirstChild;
+				for (XmlNode childNode = node.FirstChild;
 					null != childNode;
 					childNode = childNode.NextSibling)
 				{
