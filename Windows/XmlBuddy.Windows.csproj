@@ -76,6 +76,9 @@
     <Compile Include="..\Source\XmlFile.cs">
       <Link>XmlFile.cs</Link>
     </Compile>
+    <Compile Include="..\Source\XmlObject.cs">
+      <Link>XmlObject.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -109,7 +109,7 @@ namespace XmlBuddy
 		/// <summary>
 		/// write out this object to an xml file
 		/// </summary>
-		public void WriteXml()
+		public virtual void WriteXml()
 		{
 			//open the file, create it if it doesnt exist yet
 			using (XmlTextWriter xmlFile = new XmlTextWriter(Filename.File, null))
