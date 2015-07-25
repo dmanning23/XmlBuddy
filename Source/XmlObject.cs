@@ -10,3 +10,4 @@ namespace XmlBuddy
 			throw new XmlException(string.Format("Unknown xml node passed to {0}: \"{1}\"", GetType(), node.Name));
 		}
 	}
+}

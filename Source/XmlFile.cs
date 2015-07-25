@@ -168,14 +168,15 @@ namespace XmlBuddy
 					}
 				}
 			}
-		}
 
-		public static void ReadAttributes(XmlNode node, XmlNodeFunc func)
-		{
-			var attributes = node.Attributes;
-			for (int i = 0; i < attributes.Count; i++)
+			//Parse all the attributes too
+			if (null != node.Attributes)
 			{
-				func(attributes.Item(i));
+				var attributes = node.Attributes;
+				for (int i = 0; i < attributes.Count; i++)
+				{
+					func(attributes.Item(i));
+				}
 			}
 		}
 
