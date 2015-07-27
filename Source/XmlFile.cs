@@ -141,6 +141,12 @@ namespace XmlBuddy
 		/// <param name="node">the xml node to read from</param>
 		public abstract void ParseXmlNode(XmlNode node);
 
+		protected void NodeError(XmlNode node)
+		{
+			//what is in this node?
+			throw new XmlException(string.Format("Unknown xml node passed to {0}: \"{1}\"", GetType(), node.Name));
+		}
+
 		/// <summary>
 		/// Write out all the data for this object to xml nodes.
 		/// </summary>
