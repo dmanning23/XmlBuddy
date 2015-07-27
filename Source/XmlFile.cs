@@ -138,15 +138,14 @@ namespace XmlBuddy
 		/// <summary>
 		/// Parse a node from the xml file.
 		/// </summary>
-		/// <param name="xmlNode">the xml node to read from</param>
-		/// <returns></returns>
-		public abstract void ParseXmlNode(XmlNode xmlNode);
+		/// <param name="node">the xml node to read from</param>
+		public abstract void ParseXmlNode(XmlNode node);
 
 		/// <summary>
 		/// Write out all the data for this object to xml nodes.
 		/// </summary>
-		/// <param name="xmlFile"></param>
-		public abstract void WriteXmlNodes(XmlTextWriter xmlFile);
+		/// <param name="xmlWriter"></param>
+		public abstract void WriteXmlNodes(XmlTextWriter xmlWriter);
 
 		/// <summary>
 		/// Given an xml node, call the delegate on all its child nodes
