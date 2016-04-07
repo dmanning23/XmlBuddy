@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>XmlBuddy.iOS</id>
+        <version>1.0.1</version>
+        <title>XmlBuddy.iOS</title>
+        <authors>dmanning23</authors>
+		<owners>dmanning23</owners>
+		<projectUrl>https://github.com/dmanning23/XmlBuddy</projectUrl>
+		<licenseUrl>https://github.com/dmanning23/XmlBuddy/blob/master/LICENSE.txt</licenseUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>Quick library for helping to read in content from xml files</description>
+		<releaseNotes />
+		<copyright>Copyright 2016</copyright>
+		<tags>MonoGame iOS</tags>
+		<dependencies>
+			<dependency id="FilenameBuddy.iOS" version="(1.0,)"/>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="Y:\Documents\Projects\XmlBuddy\XmlBuddy\XmlBuddy.iOS\bin\Release\XmlBuddy.iOS.pdb" target="lib\XmlBuddy.iOS.pdb" />
+        <file src="Y:\Documents\Projects\XmlBuddy\XmlBuddy\XmlBuddy.iOS\bin\Release\XmlBuddy.iOS.dll" target="lib\XmlBuddy.iOS.dll" />
+    </files>
+</package>
