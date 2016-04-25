@@ -15,6 +15,10 @@ namespace XmlBuddy
 		/// write this dude out to file
 		/// </summary>
 		/// <param name="xmlWriter"></param>
-		public abstract void WriteXmlNode(XmlTextWriter xmlWriter);
+#if WINDOWS_UWP
+		public abstract void WriteXmlNodes();
+#else
+		public abstract void WriteXmlNodes(XmlTextWriter xmlWriter);
+#endif
 	}
 }

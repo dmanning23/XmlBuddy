@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+	<metadata>
+		<id>XmlBuddy</id>
+		<version>1.0.0</version>
+		<title>XmlBuddy</title>
+		<authors>dmanning23</authors>
+		<owners>dmanning23</owners>
+		<projectUrl>https://github.com/dmanning23/XmlBuddy</projectUrl>
+		<licenseUrl>https://github.com/dmanning23/XmlBuddy/blob/master/LICENSE.txt</licenseUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>Quick library for helping to read in content from xml files</description>
+		<releaseNotes />
+		<copyright>Copyright 2016</copyright>
+		<tags>pcl, windows phone, winphone, android, ios, windows universal, monogame</tags>
+		<dependencies>
+
+			<!--Xamarin.Android-->
+			<group targetFramework="MonoAndroid10">
+				<dependency id="MonoGame.Framework.Android" version="3.5"/>
+				<dependency id="Filename" version="1.0.1"/>
+			</group>
+
+			<!--Xamarin.iOS Unified-->
+			<group targetFramework="Xamarin.iOS10">
+				<dependency id="MonoGame.Framework.iOS" version="3.5"/>
+				<dependency id="Filename" version="1.0.1"/>
+			</group>
+
+			<!--Win Universal-->
+			<group targetFramework="uap10.0">
+				<dependency id="MonoGame.Framework.WindowsUniversal" version="3.5"/>
+				<dependency id="Microsoft.NETCore.UniversalWindowsPlatform" version="5.1"/>
+				<dependency id="Filename" version="1.0.1"/>
+			</group>
+
+			<group targetFramework="net451">
+				<dependency id="MonoGame.Framework.DesktopGL" version="3.5"/>
+				<dependency id="Filename" version="1.0.1"/>
+			</group>
+
+		</dependencies>
+	</metadata>
+	<files>
+
+		<!--Xamarin.Android-->
+		<file src="XmlBuddy.Android\bin\Release\XmlBuddy.Android.pdb" target="lib\MonoAndroid10\XmlBuddy.Android.pdb" />
+		<file src="XmlBuddy.Android\bin\Release\XmlBuddy.Android.dll" target="lib\MonoAndroid10\XmlBuddy.Android.dll" />
+
+		<!--Xamarin.iOS Unified-->
+		<file src="XmlBuddy.iOS\bin\Release\XmlBuddy.iOS.pdb" target="lib\Xamarin.iOS10\XmlBuddy.iOS.pdb" />
+		<file src="XmlBuddy.iOS\bin\Release\XmlBuddy.iOS.dll" target="lib\Xamarin.iOS10\XmlBuddy.iOS.dll" />
+
+		<!--Windows Universal-->
+		<file src="XmlBuddy.WindowsUniversal\bin\Release\XmlBuddy.WindowsUniversal.pdb" target="lib\uap10.0\XmlBuddy.WindowsUniversal.pdb" />
+		<file src="XmlBuddy.WindowsUniversal\bin\Release\XmlBuddy.WindowsUniversal.dll" target="lib\uap10.0\XmlBuddy.WindowsUniversal.dll" />
+
+		<!--DesktopGL-->
+		<file src="XmlBuddy.DesktopGL\bin\Release\XmlBuddy.DesktopGL.pdb" target="lib\net451\XmlBuddy.DesktopGL.pdb" />
+		<file src="XmlBuddy.DesktopGL\bin\Release\XmlBuddy.DesktopGL.dll" target="lib\net451\XmlBuddy.DesktopGL.dll" />
+
+	</files>
+</package>

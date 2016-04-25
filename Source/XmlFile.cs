@@ -3,12 +3,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Xml;
-#if ANDROID
 using Microsoft.Xna.Framework;
-#endif
-#if OUYA
-using Ouya.Console.Api;
-#endif
 
 namespace XmlBuddy
 {
@@ -66,15 +61,13 @@ namespace XmlBuddy
 		/// </summary>
 		public virtual void ReadXmlFile()
 		{
-			Stream stream = null;
-			try
-			{
-				// Open the file.
+			// Open the file.
 #if ANDROID
-				stream = Game.Activity.Assets.Open(XmlFilename.File);
+			using (var stream = Game.Activity.Assets.Open(XmlFilename.File))
 #else
-				stream = File.Open(Filename.File, FileMode.Open, FileAccess.Read);
+			using (var stream = File.Open(Filename.File, FileMode.Open, FileAccess.Read))
 #endif
+			{
 				XmlDocument xmlDoc = new XmlDocument();
 				try
 				{
@@ -84,7 +77,7 @@ namespace XmlBuddy
 				{
 					throw new Exception(string.Format("error in {0}", Filename.GetFile()), ex);
 				}
-				
+
 				XmlNode rootNode = xmlDoc.DocumentElement;
 				if (rootNode.NodeType != XmlNodeType.Element)
 				{
@@ -95,15 +88,6 @@ namespace XmlBuddy
 				//Read in child nodes
 				ReadChildNodes(rootNode, ParseXmlNode);
 			}
-			finally
-			{
-				if (null != stream)
-				{
-					// Close the file.
-					stream.Close();
-					stream.Dispose();
-				}
-			}
 		}
 
 		/// <summary>
@@ -111,6 +95,7 @@ namespace XmlBuddy
 		/// </summary>
 		public virtual void WriteXml()
 		{
+#if !WINDOWS_UWP
 			//open the file, create it if it doesnt exist yet
 			using (XmlTextWriter xmlFile = new XmlTextWriter(Filename.File, null))
 			{
@@ -133,6 +118,7 @@ namespace XmlBuddy
 				xmlFile.Flush();
 				xmlFile.Close();
 			}
+#endif
 		}
 
 		/// <summary>
@@ -151,7 +137,11 @@ namespace XmlBuddy
 		/// Write out all the data for this object to xml nodes.
 		/// </summary>
 		/// <param name="xmlWriter"></param>
+#if WINDOWS_UWP
+		public abstract void WriteXmlNodes();
+#else
 		public abstract void WriteXmlNodes(XmlTextWriter xmlWriter);
+#endif
 
 		/// <summary>
 		/// Given an xml node, call the delegate on all its child nodes
@@ -185,6 +175,6 @@ namespace XmlBuddy
 			}
 		}
 
-		#endregion //Methods
+#endregion //Methods
 	}
 }
