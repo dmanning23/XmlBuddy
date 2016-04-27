@@ -3,7 +3,7 @@
   "version": 2,
   "targets": {
     "UAP,Version=v10.0": {
-      "FilenameBuddy/1.0.1": {
+      "FilenameBuddy/1.0.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0"
@@ -1901,7 +1901,7 @@
       }
     },
     "UAP,Version=v10.0/win10-arm": {
-      "FilenameBuddy/1.0.1": {
+      "FilenameBuddy/1.0.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0"
@@ -3665,7 +3665,7 @@
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
-      "FilenameBuddy/1.0.1": {
+      "FilenameBuddy/1.0.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0"
@@ -5386,7 +5386,7 @@
       }
     },
     "UAP,Version=v10.0/win10-x64": {
-      "FilenameBuddy/1.0.1": {
+      "FilenameBuddy/1.0.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0"
@@ -7159,7 +7159,7 @@
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
-      "FilenameBuddy/1.0.1": {
+      "FilenameBuddy/1.0.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0"
@@ -8880,7 +8880,7 @@
       }
     },
     "UAP,Version=v10.0/win10-x86": {
-      "FilenameBuddy/1.0.1": {
+      "FilenameBuddy/1.0.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0"
@@ -10653,7 +10653,7 @@
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
-      "FilenameBuddy/1.0.1": {
+      "FilenameBuddy/1.0.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0"
@@ -12375,11 +12375,11 @@
     }
   },
   "libraries": {
-    "FilenameBuddy/1.0.1": {
-      "sha512": "LEq5NBMqVu2J83Onut9jjycZNrfk2VmztrAcboRfJsHuvYMprypG73d/ddMPvA/G3M4PK+hKSLWHMFIpFqC4iA==",
+    "FilenameBuddy/1.0.2": {
+      "sha512": "LIi0aT1JeQx0UveBSXk+hf2oLdH0b9y4GfM7kbO6uLJoGOpRQhxOCPFitDHc8ewFmdR2yX7fCnyq+tOLwd0Kdg==",
       "type": "package",
       "files": [
-        "FilenameBuddy.1.0.1.nupkg.sha512",
+        "FilenameBuddy.1.0.2.nupkg.sha512",
         "FilenameBuddy.nuspec",
         "lib/MonoAndroid10/FilenameBuddy.Android.dll",
         "lib/MonoAndroid10/FilenameBuddy.Android.pdb",
@@ -15680,7 +15680,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "FilenameBuddy >= 1.0.1",
+      "FilenameBuddy >= 1.0.2",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.1.0",
       "MonoGame.Framework.WindowsUniversal >= 3.5.1.1679"
     ],
