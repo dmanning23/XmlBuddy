@@ -63,7 +63,7 @@ namespace XmlBuddy
 		{
 			// Open the file.
 #if ANDROID
-			using (var stream = Game.Activity.Assets.Open(XmlFilename.File))
+			using (var stream = Game.Activity.Assets.Open(Filename.File))
 #else
 			using (var stream = File.Open(Filename.File, FileMode.Open, FileAccess.Read))
 #endif
