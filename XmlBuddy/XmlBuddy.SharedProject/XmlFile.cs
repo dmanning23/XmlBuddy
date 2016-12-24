@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Xml;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 
 namespace XmlBuddy
 {
@@ -56,6 +57,14 @@ namespace XmlBuddy
 		{
 		}
 
+		public virtual void ReadXmlFile(ContentManager content)
+		{
+			var data = content.Load<XmlSource>(Filename.GetFileNoExt());
+			var xmlDoc = new XmlDocument();
+			xmlDoc.LoadXml(data.XmlCode);
+			ParseRootNode(xmlDoc);
+		}
+
 		/// <summary>
 		/// Open the specified xml file and read it in
 		/// </summary>
@@ -78,16 +87,21 @@ namespace XmlBuddy
 					throw new Exception(string.Format("error in {0}", Filename.GetFile()), ex);
 				}
 
-				XmlNode rootNode = xmlDoc.DocumentElement;
-				if (rootNode.NodeType != XmlNodeType.Element)
-				{
-					//should be an xml node!!!
-					throw new Exception("not an xml node: " + rootNode.NodeType.ToString());
-				}
-
-				//Read in child nodes
-				ReadChildNodes(rootNode, ParseXmlNode);
+				ParseRootNode(xmlDoc);
 			}
+		}
+
+		private void ParseRootNode(XmlDocument xmlDoc)
+		{
+			XmlNode rootNode = xmlDoc.DocumentElement;
+			if (rootNode.NodeType != XmlNodeType.Element)
+			{
+				//should be an xml node!!!
+				throw new Exception("not an xml node: " + rootNode.NodeType.ToString());
+			}
+
+			//Read in child nodes
+			ReadChildNodes(rootNode, ParseXmlNode);
 		}
 
 		/// <summary>
@@ -175,6 +189,6 @@ namespace XmlBuddy
 			}
 		}
 
-#endregion //Methods
+		#endregion //Methods
 	}
 }
