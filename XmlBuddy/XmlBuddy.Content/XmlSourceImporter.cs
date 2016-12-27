@@ -1,18 +1,31 @@
 ﻿using Microsoft.Xna.Framework.Content.Pipeline;
+using System;
+using TInput = XmlBuddy.XmlSource;
 
 namespace XmlBuddy.Content
 {
 	/// <summary>
-	/// This class will be instantiated by the XNA Content Pipeline to import a file from disk into the specified type, TImport.
-	/// 
+	/// This class will be instantiated by the XNA Framework Content Pipeline
+	/// to import a file from disk into the specified type, TImport.
+	///
 	/// This should be part of a Content Pipeline Extension Library project.
+	///
+	/// TODO: change the ContentImporter attribute to specify the correct file
+	/// extension, display name, and default processor for this importer.
 	/// </summary>
-	[ContentImporter(".xml", DefaultProcessor = "XmlDocumentProcessor", DisplayName = "Xml Source Importer")]
-	public class XmlSourceImporter : ContentImporter<XmlSource>
+	[ContentImporter(".xml", DisplayName = "XmlDocumentProcessor", DefaultProcessor = "Xml Source Importer")]
+	public class XmlSourceImporter : ContentImporter<TInput>
 	{
-		public override XmlSource Import(string filename, ContentImporterContext context)
+		public override TInput Import(string filename, ContentImporterContext context)
 		{
-			return new XmlSource(System.IO.File.ReadAllText(filename));
+			try
+			{
+				return new XmlSource(System.IO.File.ReadAllText(filename));
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("There was an error importing the thing", ex);
+			}
 		}
 	}
 }
