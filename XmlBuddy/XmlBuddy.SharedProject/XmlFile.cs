@@ -13,7 +13,7 @@ namespace XmlBuddy
 	/// <summary>
 	/// Stores all the states, messages, and state transitions
 	/// </summary>
-	public abstract class XmlFileBuddy
+	public abstract class XmlFileBuddy : IDisposable
 	{
 		#region Fields
 
@@ -26,6 +26,8 @@ namespace XmlBuddy
 		/// The file this dude was read/write from
 		/// </summary>
 		public Filename Filename { get; set; }
+
+		public ContentManager Content { protected get; set; }
 
 		#endregion //Fields
 
@@ -49,20 +51,23 @@ namespace XmlBuddy
 			Filename = new Filename(file);
 		}
 
+		protected XmlFileBuddy(string contentName, Filename file, ContentManager content) : this(contentName, file)
+		{
+			Content = content;
+		}
+
 		/// <summary>
 		/// copy constructor
 		/// </summary>
 		protected XmlFileBuddy(XmlFileBuddy obj)
-			: this(obj.ContentName, obj.Filename)
+			: this(obj.ContentName, obj.Filename, obj.Content)
 		{
 		}
 
-		public virtual void ReadXmlFile(ContentManager content)
+		public void ReadXmlFile(ContentManager content)
 		{
-			var data = content.Load<XmlSource>(Filename.GetFileNoExt());
-			var xmlDoc = new XmlDocument();
-			xmlDoc.LoadXml(data.XmlCode);
-			ParseRootNode(xmlDoc);
+			Content = content;
+			ReadXmlFile();
 		}
 
 		/// <summary>
@@ -70,24 +75,33 @@ namespace XmlBuddy
 		/// </summary>
 		public virtual void ReadXmlFile()
 		{
-			// Open the file.
-#if ANDROID
-			using (var stream = Game.Activity.Assets.Open(Filename.File))
-#else
-			using (var stream = File.Open(Filename.File, FileMode.Open, FileAccess.Read))
-#endif
+			try
 			{
-				XmlDocument xmlDoc = new XmlDocument();
-				try
+				if (null == Content)
 				{
-					xmlDoc.Load(stream);
+					// Open the file.
+#if ANDROID
+					using (var stream = Game.Activity.Assets.Open(Filename.File))
+#else
+					using (var stream = File.Open(Filename.File, FileMode.Open, FileAccess.Read))
+#endif
+					{
+						XmlDocument xmlDoc = new XmlDocument();
+						xmlDoc.Load(stream);
+						ParseRootNode(xmlDoc);
+					}
 				}
-				catch (Exception ex)
+				else
 				{
-					throw new Exception(string.Format("error in {0}", Filename.GetFile()), ex);
+					var data = Content.Load<string>(Filename.GetPathFileNoExt());
+					var xmlDoc = new XmlDocument();
+					xmlDoc.LoadXml(data);
+					ParseRootNode(xmlDoc);
 				}
-
-				ParseRootNode(xmlDoc);
+			}
+			catch (Exception ex)
+			{
+				throw new Exception(string.Format("error in {0}", Filename.GetFile()), ex);
 			}
 		}
 
@@ -151,9 +165,7 @@ namespace XmlBuddy
 		/// Write out all the data for this object to xml nodes.
 		/// </summary>
 		/// <param name="xmlWriter"></param>
-#if WINDOWS_UWP
-		public abstract void WriteXmlNodes();
-#else
+#if !WINDOWS_UWP
 		public abstract void WriteXmlNodes(XmlTextWriter xmlWriter);
 #endif
 
@@ -187,6 +199,11 @@ namespace XmlBuddy
 					func(attributes.Item(i));
 				}
 			}
+		}
+
+		public void Dispose()
+		{
+			Content = null;
 		}
 
 		#endregion //Methods

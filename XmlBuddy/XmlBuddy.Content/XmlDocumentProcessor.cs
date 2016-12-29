@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Content.Pipeline;
 using System;
-using TInput = XmlBuddy.XmlSource;
+using TInput = System.String;
 using TOutput = System.String;
 
 namespace XmlBuddy.Content
@@ -16,18 +16,18 @@ namespace XmlBuddy.Content
 	/// TODO: change the ContentProcessor attribute to specify the correct
 	/// display name for this processor.
 	/// </summary>
-	[ContentProcessor(DisplayName = "XmlBuddy.Content.ContentProcessor1")]
+	[ContentProcessor(DisplayName = "Xml - XmlBuddy")]
 	public class XmlDocumentProcessor : ContentProcessor<TInput, TOutput>
 	{
 		public override TOutput Process(TInput input, ContentProcessorContext context)
 		{
 			try
 			{
-				return input.XmlCode;
+				return input;
 			}
 			catch (Exception ex)
 			{
-				throw new Exception("There was an error processing the XmlSource", ex);
+				throw new Exception("There was an error processing the xml", ex);
 			}
 		}
 	}

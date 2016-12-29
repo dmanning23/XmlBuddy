@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Content.Pipeline;
 using System;
-using TInput = XmlBuddy.XmlSource;
+using TInput = System.String;
 
 namespace XmlBuddy.Content
 {
@@ -13,14 +13,14 @@ namespace XmlBuddy.Content
 	/// TODO: change the ContentImporter attribute to specify the correct file
 	/// extension, display name, and default processor for this importer.
 	/// </summary>
-	[ContentImporter(".xml", DisplayName = "XmlDocumentProcessor", DefaultProcessor = "Xml Source Importer")]
+	[ContentImporter(".xml", DisplayName = "XmlBuddy Importer", DefaultProcessor = "XmlDocumentProcessor")]
 	public class XmlSourceImporter : ContentImporter<TInput>
 	{
 		public override TInput Import(string filename, ContentImporterContext context)
 		{
 			try
 			{
-				return new XmlSource(System.IO.File.ReadAllText(filename));
+				return System.IO.File.ReadAllText(filename);
 			}
 			catch (Exception ex)
 			{

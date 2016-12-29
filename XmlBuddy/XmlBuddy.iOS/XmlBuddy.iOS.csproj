@@ -54,6 +54,5 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="..\XmlBuddy.SharedProject\XmlBuddy.SharedProject.projitems" Label="Shared" />
-  <Import Project="..\XmlSource.SharedProject\XmlSource.SharedProject.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

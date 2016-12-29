@@ -19,25 +19,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlBuddy.WindowsUniversal",
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "XmlBuddy.SharedProject", "XmlBuddy.SharedProject\XmlBuddy.SharedProject.shproj", "{86314618-0503-4F1D-B5DC-66DD6BD7F0E4}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "XmlSource.SharedProject", "XmlSource.SharedProject\XmlSource.SharedProject.shproj", "{34F3AA42-5161-4306-8CF8-27CBB7A42361}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlBuddy.Content", "XmlBuddy.Content\XmlBuddy.Content.csproj", "{4E98CC22-38D3-4229-913D-31BB75F8CCDA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlBuddy.Content.Tests", "XmlBuddy.Content.Tests\XmlBuddy.Content.Tests.csproj", "{91F3726A-8180-4D73-804B-90E5D31CE428}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		XmlBuddy.SharedProject\XmlBuddy.SharedProject.projitems*{0b5cae26-3034-4cde-8c7f-26fbbd02a89e}*SharedItemsImports = 4
-		XmlSource.SharedProject\XmlSource.SharedProject.projitems*{0b5cae26-3034-4cde-8c7f-26fbbd02a89e}*SharedItemsImports = 4
-		XmlSource.SharedProject\XmlSource.SharedProject.projitems*{34f3aa42-5161-4306-8cf8-27cbb7a42361}*SharedItemsImports = 13
 		XmlBuddy.SharedProject\XmlBuddy.SharedProject.projitems*{4149cf18-45d0-4be7-8fad-27f65c5805b9}*SharedItemsImports = 4
-		XmlSource.SharedProject\XmlSource.SharedProject.projitems*{4149cf18-45d0-4be7-8fad-27f65c5805b9}*SharedItemsImports = 4
-		XmlSource.SharedProject\XmlSource.SharedProject.projitems*{4e98cc22-38d3-4229-913d-31bb75f8ccda}*SharedItemsImports = 4
 		XmlBuddy.SharedProject\XmlBuddy.SharedProject.projitems*{86314618-0503-4f1d-b5dc-66dd6bd7f0e4}*SharedItemsImports = 13
 		XmlBuddy.SharedProject\XmlBuddy.SharedProject.projitems*{b29b1664-c2e7-4fe9-956d-b20fa7a6cc84}*SharedItemsImports = 4
-		XmlSource.SharedProject\XmlSource.SharedProject.projitems*{b29b1664-c2e7-4fe9-956d-b20fa7a6cc84}*SharedItemsImports = 4
 		XmlBuddy.SharedProject\XmlBuddy.SharedProject.projitems*{d4bec428-a9f8-481f-8d3e-ddb0096576b0}*SharedItemsImports = 4
-		XmlSource.SharedProject\XmlSource.SharedProject.projitems*{d4bec428-a9f8-481f-8d3e-ddb0096576b0}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		AppStore|Any CPU = AppStore|Any CPU
@@ -174,30 +164,6 @@ Global
 		{4E98CC22-38D3-4229-913D-31BB75F8CCDA}.Release|x64.Build.0 = Release|Any CPU
 		{4E98CC22-38D3-4229-913D-31BB75F8CCDA}.Release|x86.ActiveCfg = Release|Any CPU
 		{4E98CC22-38D3-4229-913D-31BB75F8CCDA}.Release|x86.Build.0 = Release|Any CPU
-		{91F3726A-8180-4D73-804B-90E5D31CE428}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
-		{91F3726A-8180-4D73-804B-90E5D31CE428}.AppStore|Any CPU.Build.0 = Release|Any CPU
-		{91F3726A-8180-4D73-804B-90E5D31CE428}.AppStore|ARM.ActiveCfg = Release|Any CPU
-		{91F3726A-8180-4D73-804B-90E5D31CE428}.AppStore|ARM.Build.0 = Release|Any CPU
-		{91F3726A-8180-4D73-804B-90E5D31CE428}.AppStore|x64.ActiveCfg = Release|Any CPU
-		{91F3726A-8180-4D73-804B-90E5D31CE428}.AppStore|x64.Build.0 = Release|Any CPU
-		{91F3726A-8180-4D73-804B-90E5D31CE428}.AppStore|x86.ActiveCfg = Release|Any CPU
-		{91F3726A-8180-4D73-804B-90E5D31CE428}.AppStore|x86.Build.0 = Release|Any CPU
-		{91F3726A-8180-4D73-804B-90E5D31CE428}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{91F3726A-8180-4D73-804B-90E5D31CE428}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{91F3726A-8180-4D73-804B-90E5D31CE428}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{91F3726A-8180-4D73-804B-90E5D31CE428}.Debug|ARM.Build.0 = Debug|Any CPU
-		{91F3726A-8180-4D73-804B-90E5D31CE428}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{91F3726A-8180-4D73-804B-90E5D31CE428}.Debug|x64.Build.0 = Debug|Any CPU
-		{91F3726A-8180-4D73-804B-90E5D31CE428}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{91F3726A-8180-4D73-804B-90E5D31CE428}.Debug|x86.Build.0 = Debug|Any CPU
-		{91F3726A-8180-4D73-804B-90E5D31CE428}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{91F3726A-8180-4D73-804B-90E5D31CE428}.Release|Any CPU.Build.0 = Release|Any CPU
-		{91F3726A-8180-4D73-804B-90E5D31CE428}.Release|ARM.ActiveCfg = Release|Any CPU
-		{91F3726A-8180-4D73-804B-90E5D31CE428}.Release|ARM.Build.0 = Release|Any CPU
-		{91F3726A-8180-4D73-804B-90E5D31CE428}.Release|x64.ActiveCfg = Release|Any CPU
-		{91F3726A-8180-4D73-804B-90E5D31CE428}.Release|x64.Build.0 = Release|Any CPU
-		{91F3726A-8180-4D73-804B-90E5D31CE428}.Release|x86.ActiveCfg = Release|Any CPU
-		{91F3726A-8180-4D73-804B-90E5D31CE428}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -111,7 +111,6 @@
     <EmbeddedResource Include="Properties\XmlBuddy.WindowsUniversal.rd.xml" />
   </ItemGroup>
   <Import Project="..\XmlBuddy.SharedProject\XmlBuddy.SharedProject.projitems" Label="Shared" />
-  <Import Project="..\XmlSource.SharedProject\XmlSource.SharedProject.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
