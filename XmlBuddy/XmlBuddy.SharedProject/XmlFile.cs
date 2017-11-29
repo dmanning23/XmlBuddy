@@ -93,7 +93,7 @@ namespace XmlBuddy
 				}
 				else
 				{
-					var data = Content.Load<string>(Filename.GetPathFileNoExt());
+					var data = Content.Load<string>(Filename.GetRelPathFileNoExt());
 					var xmlDoc = new XmlDocument();
 					xmlDoc.LoadXml(data);
 					ParseRootNode(xmlDoc);
