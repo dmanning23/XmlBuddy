@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
 	<metadata>
 		<id>XmlBuddy</id>
-		<version>1.0.16</version>
+		<version>1.0.19</version>
 		<title>XmlBuddy</title>
 		<authors>dmanning23</authors>
 		<owners>dmanning23</owners>
@@ -37,7 +37,7 @@
 			</group>
 
 			<group targetFramework="net451">
-				<dependency id="MonoGame.Framework.DesktopGL" version="3.5"/>
+				<dependency id="MonoGame.Framework.WindowsDX" version="3.5"/>
 				<dependency id="FilenameBuddy" version="1.0.1"/>
 			</group>
 
@@ -59,9 +59,9 @@
 		<file src="XmlBuddy.WindowsUniversal\bin\Release\XmlBuddy.WindowsUniversal.pdb" target="lib\uap10.0\XmlBuddy.WindowsUniversal.pdb" />
 		<file src="XmlBuddy.WindowsUniversal\bin\Release\XmlBuddy.WindowsUniversal.dll" target="lib\uap10.0\XmlBuddy.WindowsUniversal.dll" />
 
-		<!--DesktopGL-->
-		<file src="XmlBuddy.DesktopGL\bin\Release\XmlBuddy.DesktopGL.pdb" target="lib\net451\XmlBuddy.DesktopGL.pdb" />
-		<file src="XmlBuddy.DesktopGL\bin\Release\XmlBuddy.DesktopGL.dll" target="lib\net451\XmlBuddy.DesktopGL.dll" />
+		<!--WindowsDX-->
+		<file src="XmlBuddy.WindowsDX\bin\Release\XmlBuddy.WindowsDX.pdb" target="lib\net451\XmlBuddy.WindowsDX.pdb" />
+		<file src="XmlBuddy.WindowsDX\bin\Release\XmlBuddy.WindowsDX.dll" target="lib\net451\XmlBuddy.WindowsDX.dll" />
 
 	</files>
 </package>
