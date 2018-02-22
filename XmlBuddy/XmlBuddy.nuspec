@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
 	<metadata>
 		<id>XmlBuddy</id>
-		<version>1.0.19</version>
+		<version>1.0.20</version>
 		<title>XmlBuddy</title>
 		<authors>dmanning23</authors>
 		<owners>dmanning23</owners>
@@ -17,35 +17,35 @@
 
 			<!--Xamarin.Android-->
 			<group targetFramework="MonoAndroid10">
-				<dependency id="MonoGame.Framework.Android" version="3.5"/>
-				<dependency id="FilenameBuddy" version="1.0.1"/>
+				<dependency id="MonoGame.Framework.Android" version="3.6"/>
+				<dependency id="FilenameBuddy" version="1.0"/>
 			</group>
 
 			<!--Xamarin.iOS Unified-->
 			<group targetFramework="Xamarin.iOS10">
-				<dependency id="MonoGame.Framework.iOS" version="3.5"/>
-				<dependency id="FilenameBuddy" version="1.0.1"/>
+				<dependency id="MonoGame.Framework.iOS" version="3.6"/>
+				<dependency id="FilenameBuddy" version="1.0"/>
 			</group>
 
 			<!--Win Universal-->
 			<group targetFramework="uap10.0">
-				<dependency id="MonoGame.Framework.WindowsUniversal" version="3.5"/>
+				<dependency id="MonoGame.Framework.WindowsUniversal" version="3.6"/>
 				<dependency id="Microsoft.NETCore.UniversalWindowsPlatform" version="5.1"/>
-				<dependency id="FilenameBuddy" version="1.0.1"/>
-        <dependency id="System.Xml.ReaderWriter" version="4.3"/>
-        <dependency id="System.Xml.XmlDocument" version="4.3"/>
+				<dependency id="FilenameBuddy" version="1.0"/>
+				<dependency id="System.Xml.ReaderWriter" version="4.3"/>
+				<dependency id="System.Xml.XmlDocument" version="4.3"/>
 			</group>
 
 			<group targetFramework="net451">
-				<dependency id="MonoGame.Framework.WindowsDX" version="3.5"/>
-				<dependency id="FilenameBuddy" version="1.0.1"/>
+				<dependency id="MonoGame.Framework.WindowsDX" version="3.6"/>
+				<dependency id="FilenameBuddy" version="1.0"/>
 			</group>
 
 		</dependencies>
 	</metadata>
 	<files>
 
-    <file src="XmlBuddy.Content\bin\Release\XmlBuddy.Content.dll" target="content\Content\XmlBuddy.Content.dll" />
+		<file src="XmlBuddy.Content\bin\Release\XmlBuddy.Content.dll" target="content\Content\XmlBuddy.Content.dll" />
 
 		<!--Xamarin.Android-->
 		<file src="XmlBuddy.Android\bin\Release\XmlBuddy.Android.pdb" target="lib\MonoAndroid10\XmlBuddy.Android.pdb" />
