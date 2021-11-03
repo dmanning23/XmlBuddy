@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+	<metadata>
+		<id>XmlBuddy.Bridge</id>
+		<version>2.0.6</version>
+		<title>XmlBuddy.Bridge</title>
+		<authors>dmanning23</authors>
+		<owners>dmanning23</owners>
+		<projectUrl>https://github.com/dmanning23/XmlBuddy</projectUrl>
+		<licenseUrl>https://github.com/dmanning23/XmlBuddy/blob/master/LICENSE.txt</licenseUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>Quick Bridge library for helping to read in content from xml files</description>
+		<releaseNotes />
+		<copyright>Copyright 2016</copyright>
+		<tags>android, ios, windows universal, monogame, xamarin</tags>
+		<dependencies>
+
+			<group targetFramework="net47">
+				<dependency id="MonoGame.Framework.Bridge" version="3.7"/>
+				<dependency id="FilenameBuddy.Bridge" version="2.0"/>
+				<dependency id="Bridge.Newtonsoft.Json" version="1.17"/>
+			</group>
+
+		</dependencies>
+	</metadata>
+	<files>
+
+		<file src="XmlBuddy.Content\bin\Release\XmlBuddy.Content.dll" target="content\Content\XmlBuddy.Content.dll" />
+
+		<file src="XmlBuddy.Bridge\bin\Release\XmlBuddy.Bridge.pdb" target="lib\net47\XmlBuddy.Bridge.pdb" />
+		<file src="XmlBuddy.Bridge\bin\Release\XmlBuddy.Bridge.dll" target="lib\net47\XmlBuddy.Bridge.dll" />
+
+	</files>
+</package>
