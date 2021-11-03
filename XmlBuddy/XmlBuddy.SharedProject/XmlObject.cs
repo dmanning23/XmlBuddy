@@ -1,10 +1,13 @@
 using System;
+#if !BRIDGE
 using System.Xml;
+#endif
 
 namespace XmlBuddy
 {
 	public abstract class XmlObject
 	{
+#if !BRIDGE
 		public virtual void ParseXmlNode(XmlNode node)
 		{
 			//what is in this node?
@@ -15,7 +18,6 @@ namespace XmlBuddy
 		/// write this dude out to file
 		/// </summary>
 		/// <param name="xmlWriter"></param>
-#if !WINDOWS_UWP
 		public abstract void WriteXmlNodes(XmlTextWriter xmlWriter);
 #endif
 	}

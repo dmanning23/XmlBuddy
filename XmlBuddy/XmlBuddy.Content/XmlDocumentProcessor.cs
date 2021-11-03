@@ -16,7 +16,7 @@ namespace XmlBuddy.Content
 	/// TODO: change the ContentProcessor attribute to specify the correct
 	/// display name for this processor.
 	/// </summary>
-	[ContentProcessor(DisplayName = "Xml - XmlBuddy")]
+	[ContentProcessor(DisplayName = "XmlBuddy")]
 	public class XmlDocumentProcessor : ContentProcessor<TInput, TOutput>
 	{
 		public override TOutput Process(TInput input, ContentProcessorContext context)
