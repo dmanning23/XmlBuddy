@@ -59,30 +59,21 @@ namespace XmlBuddy
 			Filename = new Filename(file);
 		}
 
-		protected XmlFileBuddy(string contentName, Filename file, ContentManager content) : this(contentName, file)
-		{
-			Content = content;
-		}
-
 		/// <summary>
 		/// copy constructor
 		/// </summary>
 		protected XmlFileBuddy(XmlFileBuddy obj)
-			: this(obj.ContentName, obj.Filename, obj.Content)
+			: this(obj.ContentName, obj.Filename)
 		{
-		}
-
-		public void ReadXmlFile(ContentManager content)
-		{
-			Content = content;
-			ReadXmlFile();
+			Content = obj.Content;
 		}
 
 		/// <summary>
 		/// Open the specified xml file and read it in
 		/// </summary>
-		public virtual void ReadXmlFile()
+		public virtual void ReadXmlFile(ContentManager content = null)
 		{
+			Content = content;
 #if BRIDGE
 			throw new NotImplementedException();
 #endif
@@ -121,43 +112,40 @@ namespace XmlBuddy
 			}
 		}
 
-		public static T ReadJsonFile<T>(Filename file, ContentManager content = null) where T : XmlFileBuddy
+		public virtual void ReadJsonFile(ContentManager content = null)
 		{
+			Content = content;
 			try
 			{
-				if (null == content)
+				if (null == Content)
 				{
 #if BRIDGE
 					throw new NotSupportedException();
 #endif
 
 #if ANDROID
-					using (var stream = Game.Activity.Assets.Open(file.File))
+					using (var stream = Game.Activity.Assets.Open(Filename.File))
 #elif !BRIDGE
-					using (var stream = File.Open(file.File, FileMode.Open, FileAccess.Read))
+					using (var stream = File.Open(Filename.File, FileMode.Open, FileAccess.Read))
 #endif
 					{
 #if !BRIDGE
-						JsonSerializer serializer = new JsonSerializer();
 						using (var sr = new StreamReader(stream))
 						{
-							using (var jsonTextReader = new JsonTextReader(sr))
-							{
-								return serializer.Deserialize<T>(jsonTextReader);
-							}
+							JsonConvert.PopulateObject(sr.ReadToEnd(), this);
 						}
 #endif
 					}
 				}
 				else
 				{
-					var data = content.Load<string>(file.GetRelPathFileNoExt());
-					return JsonConvert.DeserializeObject<T>(data);
+					var data = content.Load<string>(Filename.GetRelPathFileNoExt());
+					JsonConvert.PopulateObject(data, this);
 				}
 			}
 			catch (Exception ex)
 			{
-				throw new Exception(string.Format("error in {0}", file.GetFile()), ex);
+				throw new Exception(string.Format("error in {0}", Filename.GetFile()), ex);
 			}
 		}
 
@@ -207,13 +195,16 @@ namespace XmlBuddy
 #endif
 		}
 
-		public void WriteJson()
+		public virtual void WriteJson()
 		{
 #if !BRIDGE
 			// serialize JSON directly to a file
 			using (var file = File.CreateText(Filename.File))
 			{
-				JsonSerializer serializer = new JsonSerializer();
+				var serializer = new JsonSerializer()
+				{
+					DefaultValueHandling = DefaultValueHandling.Ignore,
+				};
 				serializer.Serialize(file, this);
 			}
 #endif
