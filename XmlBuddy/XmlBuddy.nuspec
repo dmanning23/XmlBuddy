@@ -2,16 +2,12 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
 	<metadata>
 		<id>XmlBuddy</id>
-		<version>2.0.8</version>
+		<version>4.0.0</version>
 		<title>XmlBuddy</title>
 		<authors>dmanning23</authors>
-		<owners>dmanning23</owners>
 		<projectUrl>https://github.com/dmanning23/XmlBuddy</projectUrl>
 		<licenseUrl>https://github.com/dmanning23/XmlBuddy/blob/master/LICENSE.txt</licenseUrl>
-		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>Quick library for helping to read in content from xml files</description>
-		<releaseNotes />
-		<copyright>Copyright 2016</copyright>
 		<tags>android, ios, windows universal, monogame, xamarin</tags>
 		<dependencies>
 
@@ -29,7 +25,7 @@
 				<dependency id="Newtonsoft.Json" version="13.0"/>
 			</group>
 
-			<group targetFramework="net451">
+			<group targetFramework="net452">
 				<dependency id="MonoGame.Framework.WindowsDX" version="3.7"/>
 				<dependency id="FilenameBuddy" version="2.0"/>
 				<dependency id="Newtonsoft.Json" version="13.0"/>
@@ -50,8 +46,8 @@
 		<file src="XmlBuddy.iOS\bin\Release\XmlBuddy.iOS.dll" target="lib\Xamarin.iOS10\XmlBuddy.iOS.dll" />
 
 		<!--WindowsDX-->
-		<file src="XmlBuddy.WindowsDX\bin\Release\XmlBuddy.WindowsDX.pdb" target="lib\net451\XmlBuddy.WindowsDX.pdb" />
-		<file src="XmlBuddy.WindowsDX\bin\Release\XmlBuddy.WindowsDX.dll" target="lib\net451\XmlBuddy.WindowsDX.dll" />
+		<file src="XmlBuddy.WindowsDX\bin\Release\XmlBuddy.WindowsDX.pdb" target="lib\net452\XmlBuddy.WindowsDX.pdb" />
+		<file src="XmlBuddy.WindowsDX\bin\Release\XmlBuddy.WindowsDX.dll" target="lib\net452\XmlBuddy.WindowsDX.dll" />
 
 	</files>
 </package>
