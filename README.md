@@ -59,12 +59,37 @@ public class MyItem : XmlObject
     }
 }
 
+// Nested object that supports both child elements and XML attributes
+public class Book : XmlObject
+{
+    public string Author { get; set; }
+    public string Title { get; set; }
+
+    public override void ParseXmlNode(XmlNode node)
+    {
+        switch (node.Name)
+        {
+            // node.InnerText works for both <Author>Homer</Author> and Author="Homer"
+            case "Author": Author = node.InnerText; break;
+            case "Title":  Title = node.InnerText; break;
+            default: NodeError(node); break;
+        }
+    }
+
+    public override void WriteXmlNodes(XmlTextWriter writer)
+    {
+        writer.WriteElementString("Author", Author);
+        writer.WriteElementString("Title", Title);
+    }
+}
+
 // Top-level file object
 public class MyData : XmlFileBuddy
 {
     public string Name { get; set; }
     public int Value { get; set; }
     public List<MyItem> Items { get; set; } = new();
+    public List<Book> Books { get; set; } = new();
 
     public MyData() : base("MyData") { }
 
@@ -84,6 +109,13 @@ public class MyData : XmlFileBuddy
                     Items.Add(item);
                 });
                 break;
+            case "Book":
+                // ReadChildNodes handles both child elements and attributes,
+                // so Book.ParseXmlNode works regardless of which format is used
+                var book = new Book();
+                ReadChildNodes(node, book.ParseXmlNode);
+                Books.Add(book);
+                break;
             default: NodeError(node); break;
         }
     }
@@ -101,11 +133,18 @@ public class MyData : XmlFileBuddy
             writer.WriteEndElement();
         }
         writer.WriteEndElement();
+
+        foreach (var book in Books)
+        {
+            writer.WriteStartElement("Book");
+            book.WriteXmlNodes(writer);
+            writer.WriteEndElement();
+        }
     }
 }
 ```
 
-The corresponding XML file looks like this:
+The corresponding XML file looks like this. Note that `ReadChildNodes` iterates both child elements and attributes, so `Book` can be expressed either way and parsed by the same `ParseXmlNode` implementation:
 
 ```xml
 <?xml version="1.0"?>
@@ -120,6 +159,11 @@ The corresponding XML file looks like this:
 			<Label>second</Label>
 		</Item>
 	</Items>
+	<Book>
+		<Author>Homer</Author>
+		<Title>The Iliad</Title>
+	</Book>
+	<Book Author="Homer" Title="The Odyssey" />
 </MyData>
 ```
 
