@@ -5,13 +5,8 @@ using TInput = System.String;
 namespace XmlBuddy.Content
 {
 	/// <summary>
-	/// This class will be instantiated by the XNA Framework Content Pipeline
-	/// to import a file from disk into the specified type, TImport.
-	///
-	/// This should be part of a Content Pipeline Extension Library project.
-	///
-	/// TODO: change the ContentImporter attribute to specify the correct file
-	/// extension, display name, and default processor for this importer.
+	/// MonoGame Content Pipeline importer that reads a JSON file as raw text,
+	/// passing it to <see cref="XmlDocumentProcessor"/> for further processing.
 	/// </summary>
 	[ContentImporter(".json", DisplayName = "XmlBuddy Json Importer", DefaultProcessor = "XmlDocumentProcessor")]
 	public class JsonSourceImporter : ContentImporter<TInput>
@@ -24,7 +19,7 @@ namespace XmlBuddy.Content
 			}
 			catch (Exception ex)
 			{
-				throw new Exception("There was an error importing the thing", ex);
+				throw new Exception($"Error importing JSON file: {filename}", ex);
 			}
 		}
 	}
